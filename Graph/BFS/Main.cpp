@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : Main.cpp
 // Author      : ningwangpanda
-// Version     : 1.0.0
+// Version     : 1.0.1
 // Copyright   : @ningwangpanda
 // Description : Graph Algorithm - Breadth First Search
 //============================================================================

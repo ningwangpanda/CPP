@@ -21,59 +21,48 @@ Graph::~Graph(){
 }
 
 /** function: add edge to adjacency lit */
-/** input: x: head, y: tail             */
-/** output: none                        */
+/** input   : x: head, y: tail          */
+/** output  : none                      */
 void Graph::addEdge(int x, int y){
     adj[x].push_back(y);
 }
 
-/** function: breadth first search                      **/
-/** input: staring vertex                               **/
-/** output: distance of each vertex printed in function **/
+/** function: breadth first search                        **/
+/** input   : source vertex                               **/
+/** output  : distance of each vertex printed in function **/
 void Graph::BFS(int S){
 
-	//distance of each vertex to the starting vertex
+	//distance of each vertex to source vertex
 	//initialized as not visited, i.e., -1
 	vector<long> distance(V, -1);
 
-    const int edgeLength = 1; //assume edge length to be 1
-    int dist = 1; //distance to the starting vertex
+    //use a queue to track vertices
+    list<int> vQueue;
 
-    //use two queues to track distances
-    list<int> currQueue;
-    list<int> nextQueue;
-
-    //mark the starting vertex as visited and distance is 0
-    //push it to current queue
+    //mark source vertex as visited and set distance to 0
+    //push it to queue
     distance[S] = 0;
-    currQueue.push_back(S);
+    vQueue.push_back(S);
 
-    while(!currQueue.empty()){
+    while(!vQueue.empty()){
 
-    	//process current queue, assign same distance
-        while(!currQueue.empty()){
-            int vertex = currQueue.front();
-            currQueue.pop_front();
+    	//process queue and set distance
+    	int vertex = vQueue.front();
+    	vQueue.pop_front();
 
-            //all adjacent vertices
-		    for(auto it=adj[vertex].begin(); it!=adj[vertex].end(); ++it){
+    	//all adjacent vertices
+    	for(auto it=adj[vertex].begin(); it!=adj[vertex].end(); ++it){
 
-		    	//if vertex is not visited, mark as visited and set distance
-		    	//push vertex to next queue
-                if(distance[*it]==-1){
-                	distance[*it] = edgeLength * dist;
-                    nextQueue.push_back(*it);
-                }
-            }
-        }
-
-        //move to next queue
-        dist++;
-        currQueue = nextQueue;
-        nextQueue.clear();
+    		//if vertex is not visited, mark as visited and set distance
+    		//push vertex to queue
+    		if(distance[*it]==-1){
+    			distance[*it] = edgeLength + distance[vertex];
+    			vQueue.push_back(*it);
+    		}
+    	}
     }
 
-    cout<<"distance of each vertex to the starting vertex: "<<endl;
+    cout<<"Distance of each vertex to source vertex: "<<endl;
     for(int i=0; i<V; ++i){
         cout<<distance[i]<<" ";
     }

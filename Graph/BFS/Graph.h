@@ -13,20 +13,21 @@
 using namespace std;
 
 class Graph{
-    int V; //number of vertices
-    list<int> *adj; //adjacency list representation
+    int V;                    //number of vertices
+    list<int> *adj;           //adjacency list representation
+    const int edgeLength = 1; //assume edge length to be 1
 public:
     Graph(int v);
     ~Graph();
 
     /** function: add edge to adjacency lit */
-    /** input: x: head, y: tail             */
-    /** output: none                        */
+    /** input   : x: head, y: tail          */
+    /** output  : none                      */
     void addEdge(int x, int y);
 
-    /** function: breadth first search                      **/
-    /** input: staring vertex                               **/
-    /** output: distance of each vertex printed in function **/
+    /** function: breadth first search                        **/
+    /** input   : source vertex                               **/
+    /** output  : distance of each vertex printed in function **/
     void BFS(int S);
 };
 
